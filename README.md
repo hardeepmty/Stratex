@@ -84,6 +84,8 @@ Before you begin, ensure you have met the following requirements:
     The server should now be running on `http://localhost:8000`.
 
 ## Project Structure
+
+```plaintext
 project/
 │
 ├── config/
