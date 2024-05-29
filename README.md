@@ -1,40 +1,58 @@
-##Marketplace API
-This is a Node.js API for a marketplace application. It allows users to register, login, and manage text entries. Users can also upload CSV files to create text entries in bulk.
+# Marketplace Application
 
-Features:
+The Marketplace Application is a web-based platform designed to facilitate buying and selling of various items. It provides features for user registration, authentication, text data management, and more.
 
-User registration and login with role-based authorization (seller)
-Uploading CSV files to create text entries
-CRUD operations on text entries (create, read, update, delete)
-JWT authentication for secure access
-Tech Stack:
+## Table of Contents
 
-Node.js
-Express.js
-MySQL
-Body-parser
-bcrypt *jsonwebtoken
-cors
-multer
-csvtojson
-Installation:
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Endpoints](#endpoints)
+- [Contributing](#contributing)
+- [License](#license)
 
-##Clone this repository.
-Install dependencies: npm install
-Configuration:
+## Features
 
-Update the db configuration in index.js with your MySQL connection details.
-Replace the secret key (SECRET_KEY) in index.js with a strong, unique secret.
-Running the application:
+- User registration and login with authentication.
+- Uploading CSV files to create text data.
+- Viewing all text data.
+- Updating and deleting text data.
+- Role-based authorization for text management (seller role).
 
-Start the server: node index.js
-The API will be accessible on http://localhost:8000
-API Endpoints:
+## Installation
 
-POST /register: Register a new user with username, password, and role (seller).
-POST /login: Login a user with username and password. Returns a JWT token on successful login.
-POST /texts (Authorized, Seller only): Upload a CSV file to create text entries. Requires a JWT token in the authorization header.
-GET /texts (Authorized): Get a list of all text entries. Requires a JWT token in the authorization header.
-PUT /texts/:id (Authorized, Seller only): Update a text entry by ID. Requires a JWT token in the authorization header.
-DELETE /texts/:id (Authorized, Seller only): Delete a text entry by ID. Requires a JWT token in the authorization header.
-Note: This is a basic example and may require further development and security considerations for production use.
+To set up the Marketplace Application on your local machine, follow these steps:
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/your_username/marketplace.git
+    ```
+
+2. **Install dependencies:**
+
+    ```bash
+    cd marketplace
+    npm install
+    ```
+
+3. **Set up the database:**
+
+   - Ensure you have MySQL installed and running on your machine.
+   - Create a new database named `marketplace`.
+   - Import the database schema from `database/schema.sql` into your MySQL database.
+
+4. **Configure environment variables:**
+
+    Create a `.env` file in the root directory and add the following variables:
+
+    ```plaintext
+    SECRET_KEY=your_secret_key
+    ```
+
+## Usage
+
+To start the server, run:
+
+```bash
+npm start
