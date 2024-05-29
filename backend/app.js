@@ -6,11 +6,9 @@ const textRoutes = require('./routes/textRoutes');
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Routes
 app.use('/auth', authRoutes);
 app.use('/texts', textRoutes);
 
