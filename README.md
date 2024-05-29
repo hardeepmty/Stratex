@@ -1,114 +1,40 @@
-# Marketplace Application
+##Marketplace API
+This is a Node.js API for a marketplace application. It allows users to register, login, and manage text entries. Users can also upload CSV files to create text entries in bulk.
 
-This is a marketplace application built using Node.js, Express.js, MySQL, and several other libraries. The application follows the MVC (Model-View-Controller) architecture for better organization and maintainability.
+Features:
 
-## Features
+User registration and login with role-based authorization (seller)
+Uploading CSV files to create text entries
+CRUD operations on text entries (create, read, update, delete)
+JWT authentication for secure access
+Tech Stack:
 
-- User registration and authentication with JWT
-- Role-based access control
-- File upload (CSV) and processing
-- CRUD operations for texts
+Node.js
+Express.js
+MySQL
+Body-parser
+bcrypt *jsonwebtoken
+cors
+multer
+csvtojson
+Installation:
 
-## Prerequisites
+##Clone this repository.
+Install dependencies: npm install
+Configuration:
 
-Before you begin, ensure you have met the following requirements:
+Update the db configuration in index.js with your MySQL connection details.
+Replace the secret key (SECRET_KEY) in index.js with a strong, unique secret.
+Running the application:
 
-- Node.js (version 14.x or later)
-- MySQL (version 8.x or later)
-- npm (Node package manager, which comes with Node.js)
+Start the server: node index.js
+The API will be accessible on http://localhost:8000
+API Endpoints:
 
-## Installation
-
-1. **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/yourusername/marketplace-app.git
-    cd marketplace-app
-    ```
-
-2. **Install the dependencies:**
-
-    ```bash
-    npm install
-    ```
-
-3. **Setup the MySQL database:**
-
-    - Create a new database called `marketplace`.
-
-    ```sql
-    CREATE DATABASE marketplace;
-    ```
-
-    - Create a `users` table:
-
-    ```sql
-    CREATE TABLE users (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      username VARCHAR(255) NOT NULL,
-      password VARCHAR(255) NOT NULL,
-      role VARCHAR(50) NOT NULL
-    );
-    ```
-
-    - Create a `texts` table:
-
-    ```sql
-    CREATE TABLE texts (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      content TEXT NOT NULL,
-      createdBy INT,
-      FOREIGN KEY (createdBy) REFERENCES users(id)
-    );
-    ```
-
-4. **Configure the database connection:**
-
-    - Open `config/db.js` and update the database connection details if necessary.
-
-    ```javascript
-    const db = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: 'YourMySQLPassword',
-      database: 'marketplace'
-    });
-    ```
-
-5. **Start the server:**
-
-    ```bash
-    npm start
-    ```
-
-    The server should now be running on `http://localhost:8000`.
-
-## Project Structure
-
-```plaintext
-project/
-│
-├── config/
-│   └── db.js
-│
-├── controllers/
-│   ├── authController.js
-│   └── textController.js
-│
-├── models/
-│   ├── User.js
-│   └── Text.js
-│
-├── middleware/
-│   ├── auth.js
-│   └── authorize.js
-│
-├── routes/
-│   ├── authRoutes.js
-│   └── textRoutes.js
-│
-├── utils/
-│   └── multer.js
-│
-├── app.js
-└── server.js
+POST /register: Register a new user with username, password, and role (seller).
+POST /login: Login a user with username and password. Returns a JWT token on successful login.
+POST /texts (Authorized, Seller only): Upload a CSV file to create text entries. Requires a JWT token in the authorization header.
+GET /texts (Authorized): Get a list of all text entries. Requires a JWT token in the authorization header.
+PUT /texts/:id (Authorized, Seller only): Update a text entry by ID. Requires a JWT token in the authorization header.
+DELETE /texts/:id (Authorized, Seller only): Delete a text entry by ID. Requires a JWT token in the authorization header.
+Note: This is a basic example and may require further development and security considerations for production use.
