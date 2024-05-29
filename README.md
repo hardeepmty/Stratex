@@ -1,114 +1,58 @@
 # Marketplace Application
 
-This is a marketplace application built using Node.js, Express.js, MySQL, and several other libraries. The application follows the MVC (Model-View-Controller) architecture for better organization and maintainability.
+The Marketplace Application is a web-based platform designed to facilitate buying and selling of various items. It provides features for user registration, authentication, text data management, and more.
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Endpoints](#endpoints)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
-- User registration and authentication with JWT
-- Role-based access control
-- File upload (CSV) and processing
-- CRUD operations for texts
-
-## Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-
-- Node.js (version 14.x or later)
-- MySQL (version 8.x or later)
-- npm (Node package manager, which comes with Node.js)
+- User registration and login with authentication.
+- Uploading CSV files to create text data.
+- Viewing all text data.
+- Updating and deleting text data.
+- Role-based authorization for text management (seller role).
 
 ## Installation
+
+To set up the Marketplace Application on your local machine, follow these steps:
 
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/marketplace-app.git
-    cd marketplace-app
+    git clone https://github.com/your_username/marketplace.git
     ```
 
-2. **Install the dependencies:**
+2. **Install dependencies:**
 
     ```bash
+    cd marketplace
     npm install
     ```
 
-3. **Setup the MySQL database:**
+3. **Set up the database:**
 
-    - Create a new database called `marketplace`.
+   - Ensure you have MySQL installed and running on your machine.
+   - Create a new database named `marketplace`.
+   - Import the database schema from `database/schema.sql` into your MySQL database.
 
-    ```sql
-    CREATE DATABASE marketplace;
+4. **Configure environment variables:**
+
+    Create a `.env` file in the root directory and add the following variables:
+
+    ```plaintext
+    SECRET_KEY=your_secret_key
     ```
 
-    - Create a `users` table:
+## Usage
 
-    ```sql
-    CREATE TABLE users (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      username VARCHAR(255) NOT NULL,
-      password VARCHAR(255) NOT NULL,
-      role VARCHAR(50) NOT NULL
-    );
-    ```
+To start the server, run:
 
-    - Create a `texts` table:
-
-    ```sql
-    CREATE TABLE texts (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      content TEXT NOT NULL,
-      createdBy INT,
-      FOREIGN KEY (createdBy) REFERENCES users(id)
-    );
-    ```
-
-4. **Configure the database connection:**
-
-    - Open `config/db.js` and update the database connection details if necessary.
-
-    ```javascript
-    const db = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: 'YourMySQLPassword',
-      database: 'marketplace'
-    });
-    ```
-
-5. **Start the server:**
-
-    ```bash
-    npm start
-    ```
-
-    The server should now be running on `http://localhost:8000`.
-
-## Project Structure
-
-```plaintext
-project/
-│
-├── config/
-│   └── db.js
-│
-├── controllers/
-│   ├── authController.js
-│   └── textController.js
-│
-├── models/
-│   ├── User.js
-│   └── Text.js
-│
-├── middleware/
-│   ├── auth.js
-│   └── authorize.js
-│
-├── routes/
-│   ├── authRoutes.js
-│   └── textRoutes.js
-│
-├── utils/
-│   └── multer.js
-│
-├── app.js
-└── server.js
+```bash
+npm start
