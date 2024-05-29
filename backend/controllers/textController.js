@@ -31,14 +31,14 @@ const updateText = (req, res) => {
     if (results.length > 0) {
       const text = results[0];
       if (text.createdBy !== req.user.id) {
-        return res.sendStatus(403); // Forbidden
+        return res.sendStatus(403); 
       }
       Text.updateById(id, content, (err, result) => {
         if (err) throw err;
         res.send('Text updated!');
       });
     } else {
-      res.sendStatus(404); // Not Found
+      res.sendStatus(404); 
     }
   });
 };
@@ -50,14 +50,14 @@ const deleteText = (req, res) => {
     if (results.length > 0) {
       const text = results[0];
       if (text.createdBy !== req.user.id) {
-        return res.sendStatus(403); // Forbidden
+        return res.sendStatus(403); 
       }
       Text.deleteById(id, (err, result) => {
         if (err) throw err;
         res.send('Text deleted!');
       });
     } else {
-      res.sendStatus(404); // Not Found
+      res.sendStatus(404); 
     }
   });
 };
